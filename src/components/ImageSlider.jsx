@@ -11,7 +11,9 @@ export const ImageSlider = ({ url, limit = 5, page = 1 }) => {
 	const handlePrevious = () => {
 		setCurrentSlide(currentSlide === 0 ? images.length - 1 : currentSlide - 1);
 	};
-	const handleNext = () => {};
+	const handleNext = () => {
+		setCurrentSlide(currentSlide === images.length - 1 ? 0 : currentSlide + 1);
+	};
 
 	const fetchImages = async (getUrl) => {
 		try {
@@ -50,7 +52,11 @@ export const ImageSlider = ({ url, limit = 5, page = 1 }) => {
 							key={imageItem.id}
 							alt={imageItem.download_url}
 							src={imageItem.download_url}
-							className="current-image"
+							className={
+								currentSlide === index
+									? "current-image"
+									: "current-image hide-current-image"
+							}
 						/>
 				  ))
 				: null}
@@ -61,7 +67,15 @@ export const ImageSlider = ({ url, limit = 5, page = 1 }) => {
 			<span className="circle-indicators">
 				{images && images.length
 					? images.map((_, index) => (
-							<button key={index} className="current-indicator"></button>
+							<button
+								key={index}
+								className={
+									currentSlide === index
+										? "current-indicator"
+										: "current-indicator update-current indicator"
+								}
+								onClick={() => setCurrentSlide(index)}
+							></button>
 					  ))
 					: null}
 			</span>
