@@ -47,7 +47,7 @@ export const ImageSlider = ({ url, limit = 5, page = 1 }) => {
 				className="arrow arrow-left"
 			/>
 			{images && images.length
-				? images.map((imageItem) => (
+				? images.map((imageItem, index) => (
 						<img
 							key={imageItem.id}
 							alt={imageItem.download_url}
@@ -72,7 +72,7 @@ export const ImageSlider = ({ url, limit = 5, page = 1 }) => {
 								className={
 									currentSlide === index
 										? "current-indicator"
-										: "current-indicator update-current indicator"
+										: "current-indicator inactive-indicator"
 								}
 								onClick={() => setCurrentSlide(index)}
 							></button>
